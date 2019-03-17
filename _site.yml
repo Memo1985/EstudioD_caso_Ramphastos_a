@@ -1,0 +1,12 @@
+name: "Ecologia de aves"
+output:_dir: "."
+navbar:
+  title: "Tucan Garganta Amarilla"
+  left:
+    - text: "ECOLOGIA"
+      href: index.html
+    - text: "Bioacústica"
+      href: about.html
+    - text: "Acústica del Tucán Garganta Amarilla"
+      href: acustica2.html
+    

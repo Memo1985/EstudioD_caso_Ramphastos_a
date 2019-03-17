@@ -1,0 +1,197 @@
+---
+title: "Análisis Estadisticos"
+
+
+output: html_document
+---
+
+```{r,include= F}
+setwd("C:/Users/Memo10/Desktop/AVES/git/EstudioD_caso_Ramphastos_a")
+getwd()
+```
+
+```{r,include= F}
+getwd()
+```
+
+```{r,include= F}
+library(nlme)
+library(ggplot2)
+library(scales)
+library(ape)
+library(reshape)
+library(corrplot)
+library(factoextra)
+library(vegan)
+library(ade4)
+library(gridExtra)
+library(RColorBrewer)
+library(wesanderson)
+library(dplyr)
+```
+
+```{r,include= F}
+#borrar
+tucan <- read.delim("./Metricas_Colom_CR_Ecua.csv",sep = ",",h=T)
+str(tucan)
+```
+
+```{r,include= F}
+variable.names(tucan)
+tucan <- filter(tucan,Dif_T>0)
+tucan <- filter(tucan,T_Max>0)
+tucan <- filter(tucan,Freq_B>0)
+tucan <- filter(tucan,Freq_A>0)
+tucan <- filter(tucan,Max_Freq>0)
+tucan <- filter(tucan,Max_Ent>0)
+tucan <- filter(tucan,Ener>0)
+```
+
+**Correlacion**
+<p align="justify">
+Una matriz de correlación permite conocer cuáles variables están correlacionadas, así podemos elegir métricas que difieran entre sí para tener un mejor análisis de la bioacústica. Figura 5
+</p>
+
+```{r}
+matriz_correlacion<-cor(tucan[,-c(1,2)],method = "spearman")
+matriz_correlacion
+```
+
+
+
+Figura:5
+![](imagen/Diapositiva1.JPG)
+
+
+
+
+
+
+**Análisis de Componentes Principales**
+
+<p align="justify">
+El análisis de componentes principales (PCA) relaciona las métricas de bioacústica entre sí, por medio de autovalores, y permite conocer las relaciones lineales y la línea de mejor ajuste para todos los datos. Figura 6 
+</p>
+
+```{r,include=FALSE}
+tucan_pca <- read.delim("./tucan_pca.csv",sep = ";",h=T,row.names = 1)
+tucan_pca2 <- decostand(tucan_pca,"standardize")
+res.pca <- prcomp(tucan_pca2, scale = TRUE)
+
+fviz_pca_ind(res.pca,
+             col.ind = "cos2", # Color by the quality of representation
+             gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
+             repel = TRUE     # Avoid text overlapping
+)
+
+
+```
+
+```{r}
+fviz_pca_biplot(res.pca, repel = TRUE,
+                col.var = "#2E9FDF", # Variables color
+                col.ind = "#696969"  # Individuals color
+)
+```
+\
+\
+<p align="justify">
+Este resultado del PCA permite determinar que las métricas de Bioacústica de Ecuador son diferentes a las obtenidas en Colombia y Costa Rica. Además,en Costa Rica están los valores más altos de Máxima Entropía y en Colombia los de mínima entropía. Figura 7
+</p>
+
+**Diferencias de bioacústica entre países**
+
+```{r}
+modelo1 <- lm(Dif_T~Pais,data=tucan)
+m1 <- anova(modelo1)
+modelo2 <- lm(T_Max~Pais,data=tucan)
+m2 <- anova(modelo2)
+modelo3 <- lm(Freq_B~Pais,data=tucan)
+m3 <- anova(modelo3)
+modelo4 <- lm(Freq_A~Pais,data=tucan)
+m4 <- anova(modelo4)
+modelo5 <- lm(Max_Freq~Pais,data=tucan)
+m5 <- anova(modelo5)
+modelo6 <- lm(Max_Ent~Pais,data=tucan)
+m6 <- anova(modelo6)
+modelo7 <- lm(Ener~Pais,data=tucan)
+m7 <- anova(modelo7)
+```
+
+
+```{r,include=FALSE}
+Variables <- c("Dif_T~Pais","T_Max~Pais","Freq_b~Pais","Freq_A~Pais","Max_Freq~Pais","Max_Ent~Pais","Ener~Pais")
+P_value <- c(m1$`Pr(>F)`,m2$`Pr(>F)`,m3$`Pr(>F)`,m4$`Pr(>F)`,m5$`Pr(>F)`,m6$`Pr(>F)`,m7$`Pr(>F)`)
+F_value <- c(m1$`F value`,m2$`F value`,m3$`F value`,m4$`F value`,m5$`F value`,m6$`F value`,m7$`F value`)
+F_value <- na.omit(F_value)
+P_value <- na.omit(P_value)
+Cuadro_relaciones <- data.frame(Variables,F_value,P_value)
+```
+```{r}
+Cuadro_relaciones
+```
+
+Figura 7
+![](imagen/Diapositiva2.JPG)
+\
+
+<p align="justify">
+Los cantos suelen ser vocalizaciones más complejas y se desarrollan para defender un territorio y atraer a la pareja durante la época reproductiva.
+La vocalización de los cantos esta asociada con la reproducción y a la vez con la duración del día, la testosterona de los machos de muchas especies aumentan según lo largo que sean los días y por lo tanto aumentan los cantos, este comportamiento resulta más evidente en primavera y verano en lugares templados; en las zonas tropicales que no tienen estaciones tan marcadas, permite que la época reproductiva sea más larga y que se reproduzcan cantos durante casi todo el año, además en el trópico no sólo los machos cantan como suele ser en los lugares templados, sino que también es común que las hembras  de varias especies lo hagan (Gordillo, Ortiz & Navarro; 2013).
+</p>
+ 
+<p align="justify">
+El hábitat suelen influir en el sonido emitido por las aves en este caso los cantos, hay estudios que reflejan que en lugares con vegetación  densa y compleja así como bosques o selvas las frecuencias a las que se reproducen las vocalizaciones son más bajas en comparación con lugares que tienen vegetación menos densa así como pastizales  (Gordillo, Ortiz & Navarro; 2013).
+</p>
+
+<p align="justify">
+Estudios realizados describen que las aves que viven en zonas más urbanas han adaptado sus cantos de tal forma que vocalizan con mayor volumen y frecuencia más alta para lograr comunicarse a pesar del ruido ambiental de una ciudad (Gordillo, Ortiz & Navarro; 2013).
+</p>
+
+<p align="justify">
+La bioacústica es la ciencia donde coincide la biología y la acústica para estudiar la producción del sonido biológico de una forma no invasiva para los individuos de estudio, en el proceso de esta área de estudio se integran otras ciencias como, taxonomía, sistemática, ecología del paisaje sonoro, computación y electrónica (Pedroza, De la Rosa & Rosas; 2016).
+</p>
+<p align="justify">
+Para este estudio de caso se realizaron análisis de bioacústica de canto de la especie Ramphastos ambiguus de tres países Ecuador, Colombia y Costa Rica. Las diferencias en los parámetros del canto en relación con los tres países se analizaron por medio de un ANOVA. El coeficiente de correlación de Spearman se empleó para determinar las correlaciones entre las métricas utilizadas. El nivel de significación fue de 0.05. Los análisis estadísticos se realizaron con el programa Rstudio.</p> 
+
+<p align="justify">	
+Las siguientes métricas se encuentran altamente correlacionadas entre sí; métrica de tiempo de inicio con tiempo final (Rho de Spearman= 1), tiempo de inicio con tiempo máximo (Rho de Spearman= 1), tiempo final con tiempo máximo (Rho de Spearman= 1), energía con máximo poder (Rho de Spearman= 0,93) y pico de frecuencia con máxima frecuencia (Rho de Spearman= 0,99) (Fig. 1). Cabe recalcar que la correlación no implica causalidad, sino asociación (Chaves, 2011).
+</p>		
+<p align="justify">		
+Se observa una tendencia decreciente en las siguientes métricas con respecto a los cantos de Ecuador en comparación con Colombia y Costa Rica:  máxima frecuencia, tiempo máximo y diferencia de tiempo. Estas diferencias significativas se pueden deber a un indicio de adaptación a condiciones ambientales de cada zona, ya que se ha demostrado en algunos estudios que algunas especies varían sus parámetros de canto a lo largo de los diferentes entornos acústicos en los que se encuentren (Mendes; et al, 2011). 
+</p>
+<p align="justify">
+El hábitat suele influir en el sonido emitido por las aves en este caso los cantos, hay estudios que reflejan que, en lugares con vegetación densa y compleja, así como bosques o selvas las frecuencias a las que se reproducen las vocalizaciones son más bajas en comparación con lugares que tienen vegetación menos densa, así como pastizales (Gordillo, Ortiz & Navarro; 2013).
+</p>
+<p align="justify">
+Estudios realizados describen que las aves que viven en zonas más urbanas han adaptado sus cantos de tal forma que vocalizan con mayor volumen y frecuencia más alta para lograr comunicarse a pesar del ruido ambiental de una ciudad (Gordillo, Ortiz & Navarro; 2013).
+</p>
+\
+\
+\
+\
+
+
+
+
+
+
+**Referencias bibliográficas**
+
+
+Charif, RA, AM Waack, and LM Strickman. 2010. Raven Pro 1.4 User’s Manual. Cornell Lab of Ornithology, Ithaca, NY
+
+Ecobiosis. (s.f.). Ficha especie: Ramphastos ambiguus Swainson. Recuperado de: http://ecobiosis.museocostarica.go.cr/especies/ficha/2/4387 el 5 de marzo, 2019.
+
+Stiles, F. G., & Skutch, A. F. (2007). Guía de aves de Costa Rica. Editorial INBio.
+
+Gordillo, A., Ortiz, M & Navarro, A. (2013). Estructura y evolución de las vocalizaciones de las aves. Revista Ciencias, 32-40pp
+
+Chaves, A. (2011).  Diseño Experimental para Agrociencias. EUNED., San José, Costa Rica.
+
+Mendes, S.; Colino-Rabanal, V. J. &Peris, S. J. (2011).  Diferencias en el canto de la Ratona Común (Troglodytes musculus) en ambientes con distintos niveles de influencia humana. Hornero 026 (02): 085-093
+
+Pedroza, A; De la Rosa, J & Rosas, R. (2016).  Escuchando a la naturaleza: Del reconocimiento de voz a la bioacústica. Pistas Educativas (120): 1039-1056
+
+
+
