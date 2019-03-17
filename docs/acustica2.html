@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Análisis Estadisticos</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Tucan Garganta Amarilla</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">ECOLOGIA</a>
+</li>
+<li>
+  <a href="about.html">Bioacústica</a>
+</li>
+<li>
+  <a href="acustica2.html">Acústica del Tucán Garganta Amarilla</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Análisis Estadisticos</h1>
+
+</div>
+
+
+<strong>Correlacion</strong>
+<p align="justify">
+Una matriz de correlación permite conocer cuáles variables están correlacionadas, así podemos elegir métricas que difieran entre sí para tener un mejor análisis de la bioacústica. Figura 5
+</p>
+<pre class="r"><code>matriz_correlacion&lt;-cor(tucan[,-c(1,2)],method = &quot;spearman&quot;)
+matriz_correlacion</code></pre>
+<pre><code>##                      T_Ini       T_Fin       Dif_T      Freq_B      Freq_A
+## T_Ini           1.00000000  0.99852645  0.41426765  0.09648489 -0.02777231
+## T_Fin           0.99852645  1.00000000  0.45108957  0.10232916 -0.02935082
+## Dif_T           0.41426765  0.45108957  1.00000000  0.04304640  0.02736105
+## Freq_B          0.09648489  0.10232916  0.04304640  1.00000000  0.07855917
+## Freq_A         -0.02777231 -0.02935082  0.02736105  0.07855917  1.00000000
+## T_Max           0.99940592  0.99869769  0.42274435  0.09806716 -0.02707567
+## Ener            0.01376635  0.02578126  0.19347654  0.02749869  0.33017032
+## Max_Ent         0.07018793  0.07730664  0.18505304  0.07238629  0.45781945
+## Max_Freq       -0.07906201 -0.07599274  0.03573312  0.17455464  0.53137445
+## Max_poder      -0.08509733 -0.08165765  0.01830288 -0.03724844  0.28919689
+## Min_Entropia   -0.12189410 -0.12876846 -0.10551964 -0.01829372  0.24487292
+## Frecuenca_pico -0.08303179 -0.07986079  0.03251866  0.16944536  0.52968671
+##                      T_Max        Ener     Max_Ent    Max_Freq   Max_poder
+## T_Ini           0.99940592  0.01376635  0.07018793 -0.07906201 -0.08509733
+## T_Fin           0.99869769  0.02578126  0.07730664 -0.07599274 -0.08165765
+## Dif_T           0.42274435  0.19347654  0.18505304  0.03573312  0.01830288
+## Freq_B          0.09806716  0.02749869  0.07238629  0.17455464 -0.03724844
+## Freq_A         -0.02707567  0.33017032  0.45781945  0.53137445  0.28919689
+## T_Max           1.00000000  0.01922707  0.06989268 -0.07936235 -0.08237125
+## Ener            0.01922707  1.00000000  0.05583338  0.26400364  0.93107559
+## Max_Ent         0.06989268  0.05583338  1.00000000  0.31064956 -0.02198312
+## Max_Freq       -0.07936235  0.26400364  0.31064956  1.00000000  0.20356239
+## Max_poder      -0.08237125  0.93107559 -0.02198312  0.20356239  1.00000000
+## Min_Entropia   -0.12452185 -0.19621538  0.31991052  0.24639628 -0.24307601
+## Frecuenca_pico -0.08332394  0.26081741  0.30935539  0.99292973  0.20297818
+##                Min_Entropia Frecuenca_pico
+## T_Ini           -0.12189410    -0.08303179
+## T_Fin           -0.12876846    -0.07986079
+## Dif_T           -0.10551964     0.03251866
+## Freq_B          -0.01829372     0.16944536
+## Freq_A           0.24487292     0.52968671
+## T_Max           -0.12452185    -0.08332394
+## Ener            -0.19621538     0.26081741
+## Max_Ent          0.31991052     0.30935539
+## Max_Freq         0.24639628     0.99292973
+## Max_poder       -0.24307601     0.20297818
+## Min_Entropia     1.00000000     0.24693041
+## Frecuenca_pico   0.24693041     1.00000000</code></pre>
+<p>Figura:5 <img src="imagen/Diapositiva1.JPG" /></p>
+<p><strong>Análisis de Componentes Principales</strong></p>
+<p align="justify">
+El análisis de componentes principales (PCA) relaciona las métricas de bioacústica entre sí, por medio de autovalores, y permite conocer las relaciones lineales y la línea de mejor ajuste para todos los datos. Figura 6
+</p>
+<pre class="r"><code>fviz_pca_biplot(res.pca, repel = TRUE,
+                col.var = &quot;#2E9FDF&quot;, # Variables color
+                col.ind = &quot;#696969&quot;  # Individuals color
+)</code></pre>
+<img src="acustica2_files/figure-html/unnamed-chunk-8-1.png" width="672" /><br />
+<br />
+
+<p align="justify">
+Este resultado del PCA permite determinar que las métricas de Bioacústica de Ecuador son diferentes a las obtenidas en Colombia y Costa Rica. Además,en Costa Rica están los valores más altos de Máxima Entropía y en Colombia los de mínima entropía. Figura 7
+</p>
+<p><strong>Diferencias de bioacústica entre países</strong></p>
+<pre class="r"><code>modelo1 &lt;- lm(Dif_T~Pais,data=tucan)
+m1 &lt;- anova(modelo1)
+modelo2 &lt;- lm(T_Max~Pais,data=tucan)
+m2 &lt;- anova(modelo2)
+modelo3 &lt;- lm(Freq_B~Pais,data=tucan)
+m3 &lt;- anova(modelo3)
+modelo4 &lt;- lm(Freq_A~Pais,data=tucan)
+m4 &lt;- anova(modelo4)
+modelo5 &lt;- lm(Max_Freq~Pais,data=tucan)
+m5 &lt;- anova(modelo5)
+modelo6 &lt;- lm(Max_Ent~Pais,data=tucan)
+m6 &lt;- anova(modelo6)
+modelo7 &lt;- lm(Ener~Pais,data=tucan)
+m7 &lt;- anova(modelo7)</code></pre>
+<pre class="r"><code>Cuadro_relaciones</code></pre>
+<pre><code>##       Variables   F_value      P_value
+## 1    Dif_T~Pais  98.87827 3.275921e-40
+## 2    T_Max~Pais  65.02880 2.039845e-27
+## 3   Freq_b~Pais 152.11852 4.849718e-59
+## 4   Freq_A~Pais 181.21380 9.798235e-69
+## 5 Max_Freq~Pais  36.60018 4.094102e-16
+## 6  Max_Ent~Pais  55.99557 6.970444e-24
+## 7     Ener~Pais  18.22439 1.635980e-08</code></pre>
+Figura 7 <img src="imagen/Diapositiva2.JPG" /><br />
+
+<p align="justify">
+Los cantos suelen ser vocalizaciones más complejas y se desarrollan para defender un territorio y atraer a la pareja durante la época reproductiva. La vocalización de los cantos esta asociada con la reproducción y a la vez con la duración del día, la testosterona de los machos de muchas especies aumentan según lo largo que sean los días y por lo tanto aumentan los cantos, este comportamiento resulta más evidente en primavera y verano en lugares templados; en las zonas tropicales que no tienen estaciones tan marcadas, permite que la época reproductiva sea más larga y que se reproduzcan cantos durante casi todo el año, además en el trópico no sólo los machos cantan como suele ser en los lugares templados, sino que también es común que las hembras de varias especies lo hagan (Gordillo, Ortiz &amp; Navarro; 2013).
+</p>
+<p align="justify">
+El hábitat suelen influir en el sonido emitido por las aves en este caso los cantos, hay estudios que reflejan que en lugares con vegetación densa y compleja así como bosques o selvas las frecuencias a las que se reproducen las vocalizaciones son más bajas en comparación con lugares que tienen vegetación menos densa así como pastizales (Gordillo, Ortiz &amp; Navarro; 2013).
+</p>
+<p align="justify">
+Estudios realizados describen que las aves que viven en zonas más urbanas han adaptado sus cantos de tal forma que vocalizan con mayor volumen y frecuencia más alta para lograr comunicarse a pesar del ruido ambiental de una ciudad (Gordillo, Ortiz &amp; Navarro; 2013).
+</p>
+<p align="justify">
+La bioacústica es la ciencia donde coincide la biología y la acústica para estudiar la producción del sonido biológico de una forma no invasiva para los individuos de estudio, en el proceso de esta área de estudio se integran otras ciencias como, taxonomía, sistemática, ecología del paisaje sonoro, computación y electrónica (Pedroza, De la Rosa &amp; Rosas; 2016).
+</p>
+<p align="justify">
+Para este estudio de caso se realizaron análisis de bioacústica de canto de la especie Ramphastos ambiguus de tres países Ecuador, Colombia y Costa Rica. Las diferencias en los parámetros del canto en relación con los tres países se analizaron por medio de un ANOVA. El coeficiente de correlación de Spearman se empleó para determinar las correlaciones entre las métricas utilizadas. El nivel de significación fue de 0.05. Los análisis estadísticos se realizaron con el programa Rstudio.
+</p>
+<p align="justify">
+Las siguientes métricas se encuentran altamente correlacionadas entre sí; métrica de tiempo de inicio con tiempo final (Rho de Spearman= 1), tiempo de inicio con tiempo máximo (Rho de Spearman= 1), tiempo final con tiempo máximo (Rho de Spearman= 1), energía con máximo poder (Rho de Spearman= 0,93) y pico de frecuencia con máxima frecuencia (Rho de Spearman= 0,99) (Fig. 1). Cabe recalcar que la correlación no implica causalidad, sino asociación (Chaves, 2011).
+</p>
+<p align="justify">
+Se observa una tendencia decreciente en las siguientes métricas con respecto a los cantos de Ecuador en comparación con Colombia y Costa Rica: máxima frecuencia, tiempo máximo y diferencia de tiempo. Estas diferencias significativas se pueden deber a un indicio de adaptación a condiciones ambientales de cada zona, ya que se ha demostrado en algunos estudios que algunas especies varían sus parámetros de canto a lo largo de los diferentes entornos acústicos en los que se encuentren (Mendes; et al, 2011).
+</p>
+<p align="justify">
+El hábitat suele influir en el sonido emitido por las aves en este caso los cantos, hay estudios que reflejan que, en lugares con vegetación densa y compleja, así como bosques o selvas las frecuencias a las que se reproducen las vocalizaciones son más bajas en comparación con lugares que tienen vegetación menos densa, así como pastizales (Gordillo, Ortiz &amp; Navarro; 2013).
+</p>
+<p align="justify">
+Estudios realizados describen que las aves que viven en zonas más urbanas han adaptado sus cantos de tal forma que vocalizan con mayor volumen y frecuencia más alta para lograr comunicarse a pesar del ruido ambiental de una ciudad (Gordillo, Ortiz &amp; Navarro; 2013).
+</p>
+<p><br />
+<br />
+<br />
+<br />
+</p>
+<p><strong>Referencias bibliográficas</strong></p>
+<p>Charif, RA, AM Waack, and LM Strickman. 2010. Raven Pro 1.4 User’s Manual. Cornell Lab of Ornithology, Ithaca, NY</p>
+<p>Ecobiosis. (s.f.). Ficha especie: Ramphastos ambiguus Swainson. Recuperado de: <a href="http://ecobiosis.museocostarica.go.cr/especies/ficha/2/4387" class="uri">http://ecobiosis.museocostarica.go.cr/especies/ficha/2/4387</a> el 5 de marzo, 2019.</p>
+<p>Stiles, F. G., &amp; Skutch, A. F. (2007). Guía de aves de Costa Rica. Editorial INBio.</p>
+<p>Gordillo, A., Ortiz, M &amp; Navarro, A. (2013). Estructura y evolución de las vocalizaciones de las aves. Revista Ciencias, 32-40pp</p>
+<p>Chaves, A. (2011). Diseño Experimental para Agrociencias. EUNED., San José, Costa Rica.</p>
+<p>Mendes, S.; Colino-Rabanal, V. J. &amp;Peris, S. J. (2011). Diferencias en el canto de la Ratona Común (Troglodytes musculus) en ambientes con distintos niveles de influencia humana. Hornero 026 (02): 085-093</p>
+<p>Pedroza, A; De la Rosa, J &amp; Rosas, R. (2016). Escuchando a la naturaleza: Del reconocimiento de voz a la bioacústica. Pistas Educativas (120): 1039-1056</p>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
