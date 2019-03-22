@@ -1,16 +1,17 @@
 ---
 title: "METRICAS"
 ---
- **BIOACÚSTICA**
+ **Bioacústica**
 <p align="justify">
-La Bioacústica consiste en el estudio del comportamiento de comunicación de los animales a través de señale sonoras, estas señales  pueden ser una herramienta adecuada para descubrir y confirmar las diferencias entre especies (Tubaro, 1999). También las grabaciones de sonidos desempeñan un importante papel al permitir conocer y reconocer nuestra gran diversidad biológica, y es uno de los primeros pasos para poder conservarla. En el caso de las aves, las vocalizaciones que emiten son de los sonidos más complejos y uno de sus principales medios de comunicación. (Soncco, 2017). Figura 3
+La Bioacústica consiste en el estudio del comportamiento de comunicación de los animales a través de señale sonoras, estas señales  pueden ser una herramienta adecuada para descubrir y confirmar las diferencias entre especies (Tubaro, 1999). También las grabaciones de sonidos desempeñan un importante papel al permitir conocer y reconocer nuestra gran diversidad biológica, y es uno de los primeros pasos para poder conservarla. En el caso de las aves, las vocalizaciones que emiten son de los sonidos más complejos y uno de sus principales medios de comunicación. (Soncco, 2017). 
 </p>
+\
+\
 
 
-
-Figura 3: Espectograma del *Ramphastos ambiguus*
 ![](imagen/cuadro.jpg)
 
+**Figura 3**: Espectograma del *Ramphastos ambiguus*
 
 \
 \
@@ -21,9 +22,12 @@ Figura 3: Espectograma del *Ramphastos ambiguus*
 
 ##Métricas y su significado
 
-Figura 4: Metricas utilizadas en este trabajo  
+ 
 
 ![](imagen/foto_metrica.jpg)
+
+**Figura 4**: Metricas utilizadas en este trabajo
+
 
 \
 \

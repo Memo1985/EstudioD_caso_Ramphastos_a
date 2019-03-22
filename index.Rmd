@@ -1,17 +1,24 @@
 ---
 title: "*Ramphastos ambiguus*"
+
 ---
+<center>**Corella-Esquivel.L; Rodriguez-García.D; Ramírez-Bogantes.G**<center>
+\
+\
+\
+
+
 
 <p align="justify">
-
-**Descripción de la especie:** Tamaño mediano ( 56 cm, 750g), pico bicolor: amarillo brillante y marrón. Mayor parte del plumaje de color negro con tintes de marrón en la coronilla, parte posterior del cuello y espalda. Cara, garganta y pecho amarillo brillante, seguido por línea roja a nivel de pecho. Plumas cobertoras de la cola blancas. Patas azul brillantes (ecobiosis, s.f.; Figura 1).
+**Descripción de la especie:** Tamaño mediano ( 56 cm, 750g), pico bicolor: amarillo brillante y marrón. Mayor parte del plumaje de color negro con tintes de marrón en la coronilla, parte posterior del cuello y espalda. Cara, garganta y pecho amarillo brillante, seguido por línea roja a nivel de pecho. Plumas cobertoras de la cola blancas. Patas azul brillantes (Ecobiosis, sf.; Figura 1).
 </p>
 \
 \
 \
-**Fifura 1**
+
 ![](imagen/04.jpg)
 
+**Figura 1** Tucan alimentandose de frutos 
 
 \
 \
@@ -21,19 +28,22 @@ title: "*Ramphastos ambiguus*"
 <p align="justify">
 **Hábitat:** Domina en los árboles en fructificación, bandadas pequeñas que se desplazan entre el dosel del bosque y las áreas despejadas. Buscan frutas principalmente, pero también comen insectos, lagartijas, culebras y pichones de otros nidos (Stiles y Skutch, 2007). Figura 2 
 </p>
-Figura 2:Mapa de distrubucion 
 
 
 
-![](imagen/mapa2.jpg)
+
+![](C:\Users\Memo10\Desktop\EstudioD_caso_Ramphastos_a\imagen\mapa.jpg)
 
 
+**Figura 2**:Mapa de distrubucion a nivel mundial
+
+\
+\
 <p align="justify">
-**Hábitos:** En general dominan los árboles en fructificación, se desplazan en bandadas pequeñas por entre el dosel del bosque y áreas parcialmente despejadas, también se les observa en claros con árboles remanentes, se alimentan de fruta y complementan con insectos, lagartijas, culebras ocasionales y pichones de los nidos.
-</p>
-<p align="justify">
-**Voz:** Un chillido o gañido yo-YIP a-yip, a-yip que repite a menudo. En el atardecer las bandadas se congregan en árboles o tocones secos altos y suelen cantar en coro.
-Nido: Suelen ubicar los nidos en cavidades causadas por pudrición en un árbol vivo u ocasionalmente en un nido viejo de carpintero.
+**Voz:** Un chillido o gañido yo-YIP a-yip, a-yip que repite a menudo. En el atardecer las bandadas se congregan en árboles o tocones secos altos y suelen cantar en coro.\
+\
+\
+**Nido:** Suelen ubicar los nidos en cavidades causadas por pudrición en un árbol vivo u ocasionalmente en un nido viejo de carpintero.
 </p>
 \
 \
