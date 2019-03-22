@@ -304,9 +304,9 @@ $(document).ready(function () {
 </div>
 
 
-<strong>Correlacion</strong>
+<strong>Correlación</strong>
 <p align="justify">
-Una matriz de correlación permite conocer cuáles variables están correlacionadas, así podemos elegir métricas que difieran entre sí para tener un mejor análisis de la bioacústica. Figura 5
+Una matriz de correlación permite conocer cuáles variables están correlacionadas, así podemos elegir métricas que difieran entre sí para tener un mejor análisis de la bioacústica.
 </p>
 <pre class="r"><code>matriz_correlacion&lt;-cor(tucan[,-c(1,2)],method = &quot;spearman&quot;)
 matriz_correlacion</code></pre>
@@ -349,22 +349,38 @@ matriz_correlacion</code></pre>
 ## Max_poder       -0.24307601     0.20297818
 ## Min_Entropia     1.00000000     0.24693041
 ## Frecuenca_pico   0.24693041     1.00000000</code></pre>
-<p>Figura:5 <img src="imagen/Diapositiva1.JPG" /></p>
-<p><strong>Análisis de Componentes Principales</strong></p>
+<div class="figure">
+<img src="imagen/Diapositiva1.JPG" />
+
+</div>
+<strong>Figura:5</strong> Correlación de las metricas utilizadas<br />
+<br />
+<br />
+<strong>Análisis de Componentes Principales</strong><br />
+<br />
+
 <p align="justify">
 El análisis de componentes principales (PCA) relaciona las métricas de bioacústica entre sí, por medio de autovalores, y permite conocer las relaciones lineales y la línea de mejor ajuste para todos los datos. Figura 6
+</p>
+<p><br />
+<br />
+<br />
+<br />
+</p>
+<p><br />
+<br />
+<br />
 </p>
 <pre class="r"><code>fviz_pca_biplot(res.pca, repel = TRUE,
                 col.var = &quot;#2E9FDF&quot;, # Variables color
                 col.ind = &quot;#696969&quot;  # Individuals color
 )</code></pre>
-<img src="acustica2_files/figure-html/unnamed-chunk-8-1.png" width="672" /><br />
+<p><img src="acustica2_files/figure-html/unnamed-chunk-8-1.png" width="672" /> <strong>Figura 7</strong>.Este resultado del PCA permite determinar que las métricas de Bioacústica de Ecuador son diferentes a las obtenidas en Colombia y Costa Rica. Además,en Costa Rica están los valores más altos de Máxima Entropía y en Colombia los de mínima entropía.</p>
+<p><br />
 <br />
-
-<p align="justify">
-Este resultado del PCA permite determinar que las métricas de Bioacústica de Ecuador son diferentes a las obtenidas en Colombia y Costa Rica. Además,en Costa Rica están los valores más altos de Máxima Entropía y en Colombia los de mínima entropía. Figura 7
-</p>
-<p><strong>Diferencias de bioacústica entre países</strong></p>
+<br />
+<br />
+<strong>Diferencias de bioacústica entre países</strong></p>
 <pre class="r"><code>modelo1 &lt;- lm(Dif_T~Pais,data=tucan)
 m1 &lt;- anova(modelo1)
 modelo2 &lt;- lm(T_Max~Pais,data=tucan)
@@ -388,34 +404,56 @@ m7 &lt;- anova(modelo7)</code></pre>
 ## 5 Max_Freq~Pais  36.60018 4.094102e-16
 ## 6  Max_Ent~Pais  55.99557 6.970444e-24
 ## 7     Ener~Pais  18.22439 1.635980e-08</code></pre>
-Figura 7 <img src="imagen/Diapositiva2.JPG" /><br />
+<p><img src="imagen/Diapositiva2.JPG" /> <strong>Figura 7</strong></p>
+<br />
+<strong>Introducción</strong>
+<p align="justify">
+Los cantos suelen ser vocalizaciones más complejas y se desarrollan para defender un territorio y atraer a la pareja durante la época reproductiva (Mendes; Colino-Rabanal &amp; Peris, 2011).
+</p>
+<br />
 
 <p align="justify">
-Los cantos suelen ser vocalizaciones más complejas y se desarrollan para defender un territorio y atraer a la pareja durante la época reproductiva. La vocalización de los cantos esta asociada con la reproducción y a la vez con la duración del día, la testosterona de los machos de muchas especies aumentan según lo largo que sean los días y por lo tanto aumentan los cantos, este comportamiento resulta más evidente en primavera y verano en lugares templados; en las zonas tropicales que no tienen estaciones tan marcadas, permite que la época reproductiva sea más larga y que se reproduzcan cantos durante casi todo el año, además en el trópico no sólo los machos cantan como suele ser en los lugares templados, sino que también es común que las hembras de varias especies lo hagan (Gordillo, Ortiz &amp; Navarro; 2013).
-</p>
-<p align="justify">
-El hábitat suelen influir en el sonido emitido por las aves en este caso los cantos, hay estudios que reflejan que en lugares con vegetación densa y compleja así como bosques o selvas las frecuencias a las que se reproducen las vocalizaciones son más bajas en comparación con lugares que tienen vegetación menos densa así como pastizales (Gordillo, Ortiz &amp; Navarro; 2013).
-</p>
-<p align="justify">
-Estudios realizados describen que las aves que viven en zonas más urbanas han adaptado sus cantos de tal forma que vocalizan con mayor volumen y frecuencia más alta para lograr comunicarse a pesar del ruido ambiental de una ciudad (Gordillo, Ortiz &amp; Navarro; 2013).
-</p>
+La vocalización de los cantos está asociada con la reproducción y a la vez con la duración del día, la testosterona de los machos de muchas especies aumentan según lo largo que sean los días y por lo tanto aumentan los cantos, este comportamiento resulta más evidente en primavera y verano en lugares templados; en las zonas tropicales que no tienen estaciones tan marcadas, permite que la época reproductiva sea más larga y que se reproduzcan cantos durante casi todo el año, además en el trópico no sólo los machos cantan como suele ser en los lugares templados, sino que también es común que las hembras de varias especies lo hagan (Gordillo, Ortiz &amp; Navarro; 2013).
+</p
+\
+\
 <p align="justify">
 La bioacústica es la ciencia donde coincide la biología y la acústica para estudiar la producción del sonido biológico de una forma no invasiva para los individuos de estudio, en el proceso de esta área de estudio se integran otras ciencias como, taxonomía, sistemática, ecología del paisaje sonoro, computación y electrónica (Pedroza, De la Rosa &amp; Rosas; 2016).
 </p>
+<br />
+<br />
+<strong>Metodología</strong><br />
+
 <p align="justify">
 Para este estudio de caso se realizaron análisis de bioacústica de canto de la especie Ramphastos ambiguus de tres países Ecuador, Colombia y Costa Rica. Las diferencias en los parámetros del canto en relación con los tres países se analizaron por medio de un ANOVA. El coeficiente de correlación de Spearman se empleó para determinar las correlaciones entre las métricas utilizadas. El nivel de significación fue de 0.05. Los análisis estadísticos se realizaron con el programa Rstudio.
 </p>
+<br />
+<br />
+<strong>Discusión</strong><br />
+
 <p align="justify">
 Las siguientes métricas se encuentran altamente correlacionadas entre sí; métrica de tiempo de inicio con tiempo final (Rho de Spearman= 1), tiempo de inicio con tiempo máximo (Rho de Spearman= 1), tiempo final con tiempo máximo (Rho de Spearman= 1), energía con máximo poder (Rho de Spearman= 0,93) y pico de frecuencia con máxima frecuencia (Rho de Spearman= 0,99) (Fig. 1). Cabe recalcar que la correlación no implica causalidad, sino asociación (Chaves, 2011).
 </p>
+<br />
+
 <p align="justify">
-Se observa una tendencia decreciente en las siguientes métricas con respecto a los cantos de Ecuador en comparación con Colombia y Costa Rica: máxima frecuencia, tiempo máximo y diferencia de tiempo. Estas diferencias significativas se pueden deber a un indicio de adaptación a condiciones ambientales de cada zona, ya que se ha demostrado en algunos estudios que algunas especies varían sus parámetros de canto a lo largo de los diferentes entornos acústicos en los que se encuentren (Mendes; et al, 2011).
+Se observa una tendencia decreciente en las siguientes métricas con respecto a los cantos de Ecuador en comparación con Colombia y Costa Rica: máxima frecuencia, tiempo máximo y diferencia de tiempo.
 </p>
+<br />
+
+<p align="justify">
+Estas diferencias significativas se pueden deber a un indicio de adaptación a condiciones ambientales de cada zona, ya que se ha demostrado en algunos estudios que algunas especies varían sus parámetros de canto a lo largo de los diferentes entornos acústicos en los que se encuentren (Mendes; et al, 2011).
+</p>
+<br />
+
 <p align="justify">
 El hábitat suele influir en el sonido emitido por las aves en este caso los cantos, hay estudios que reflejan que, en lugares con vegetación densa y compleja, así como bosques o selvas las frecuencias a las que se reproducen las vocalizaciones son más bajas en comparación con lugares que tienen vegetación menos densa, así como pastizales (Gordillo, Ortiz &amp; Navarro; 2013).
 </p>
+<br />
+<strong>Conclusión</strong><br />
+
 <p align="justify">
-Estudios realizados describen que las aves que viven en zonas más urbanas han adaptado sus cantos de tal forma que vocalizan con mayor volumen y frecuencia más alta para lograr comunicarse a pesar del ruido ambiental de una ciudad (Gordillo, Ortiz &amp; Navarro; 2013).
+Para poder determinar con exactitud a que se debe la diferencia tan significativa entre los resultados entre Ecuador y Costa Rica-Colombia,se debe hacer una busqueda más exhaustiva sobre los lugares en donde se tomarón los datospara poder confirmar o descartar si la densidad vegetal es la responsable de la diferencia de resultados.
 </p>
 <p><br />
 <br />
